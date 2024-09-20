@@ -17,7 +17,7 @@ function LoginPage() {
         <div className='flex justify-center h-screen items-center'>
             <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
                 {
-                    loginErrors.map((error, i) => (
+                    loginErrors && loginErrors.map((error, i) => (
                         <div className='bg-red-500 p-2 text-white m-2' key={i}>
                             {error}
                         </div>

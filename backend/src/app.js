@@ -8,10 +8,7 @@ import { FRONTEND_URL } from "./config.js";
 
 const app = express();
 app.disable('x-powered-by');
-app.use(cors({
-    origin:FRONTEND_URL,
-    credentials:true
-}));
+app.use(cors({origin:FRONTEND_URL,credentials:true}));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());

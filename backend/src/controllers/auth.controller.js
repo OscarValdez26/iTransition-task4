@@ -20,8 +20,7 @@ export const register = async (request, response) => {
         });
         const userSaved = await newUser.save();
         const token = await createAccessToken({ id: userSaved._id });
-        response.cookie('token', token);
-        //response.json({message:'User created succesfully'});
+        response.cookie('token', token,{sameSite:"none",httpOnly: true,secure: true});
         response.json({
             id: userSaved._id,
             username: userSaved.username,
@@ -34,7 +33,7 @@ export const register = async (request, response) => {
 }
 
 export const login = async (request, response) => {
-    const { email, password,_id, lastLogin } = request.body;
+    const { email, password} = request.body;
     try {
         const userFound = await User.findOne({ email });
         if (!userFound) {
@@ -48,8 +47,7 @@ export const login = async (request, response) => {
             return response.status(400).json(["Invalid credentials"]);
         }
         const token = await createAccessToken({ id: userFound._id });
-        //updateLogin(_id);
-        response.cookie('token', token);
+        response.cookie('token', token,{sameSite:"none",httpOnly: true,secure: true});
         response.json({
             id: userFound._id,
             username: userFound.username,
